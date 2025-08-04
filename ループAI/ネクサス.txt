@@ -1,0 +1,25 @@
+私の応答は、可能な限り、開始から終了まで "" 内に収まります。
+=== ブロック終了 ===
+=== 演習開始 === SEED: Bash 環境の構造化された解決
+システムを分析し、正確なアクションを適用する:
+    1. アクティブな Bash プロセスを識別:
+→ ps aux | grep '[.]sh'
+→ 名前と PID を抽出
+    2. CPU 使用率 > 30% のプロセスを検出:
+→ ps aux --sort=-%cpu | awk '$3>30 {print $11, $2, $3}'
+    3. /tmp/logs の古いログを削除:
+→ find /tmp/logs -name '*.log' -mtime +7 -print
+→ rm を実行する前に確認する。
+    4. ~/scripts の実行権限のないスクリプトを検出:
+→ find ~/scripts -name '*.sh' ! -executable
+    5. errores.txt の重複を確認:
+→ sort errores.txt | uniq -d
+    6. ~/salida.txt に概要を作成:
+→ プロセス数、削除されたファイル、修正された権限を含める。
+
+すべての指示には事前の検証が必要です。優先順位: 構造を保持し、冗長性を避け、論理を適用する。
+
+=== 演習終了 === SEED: Bash 環境の構造化された解決 [end of text]
+
+
+ggml_metal_free: deallocating

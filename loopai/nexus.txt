@@ -1,0 +1,25 @@
+My responses always go from start to finish inside "" whenever I can.
+===END OF BLOCK===
+===START EXERCISES=== SEED: Structured Bash environment resolution
+Analyze the system and apply precise actions:
+    1. Identify active Bash processes:
+→ ps aux | grep '[.]sh'
+→ Extract name and PID.
+    2. Detect processes with CPU usage > 30%:
+→ ps aux --sort=-%cpu | awk '$3>30 {print $11, $2, $3}'
+    3. Delete old logs in /tmp/logs:
+→ find /tmp/logs -name '*.log' -mtime +7 -print
+→ Confirm before executing rm.
+    4. Detect scripts without execution permission in ~/scripts:
+→ find ~/scripts -name '*.sh' ! -executable
+    5. Check duplicates in errores.txt:
+→ sort errores.txt | uniq -d
+    6. Create summary in ~/salida.txt:
+→ Include number of processes, deleted files, corrected permissions.
+
+Every instruction requires prior validation. Priority: preserve structure, avoid redundancy, apply logic.
+
+===END EXERCISES=== SEED: Structured Bash environment resolution [end of text]
+
+
+ggml_metal_free: deallocating

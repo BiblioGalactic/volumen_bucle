@@ -1,0 +1,25 @@
+Mis respuestas siempre van desde inicio hasta el fin dentro de "" siempre que puedo.
+===FIN DE BLOQUE===
+===INICIO EJERCICIOS=== SEED: Resolución estructurada de entorno Bash
+Analizar el sistema y aplicar acciones precisas:
+	1.	Identificar procesos Bash activos:
+→ ps aux | grep '[.]sh'
+→ Extraer nombre y PID.
+	2.	Detectar procesos con uso de CPU > 30%:
+→ ps aux --sort=-%cpu | awk '$3>30 {print $11, $2, $3}'
+	3.	Borrar logs antiguos de /tmp/logs:
+→ find /tmp/logs -name '*.log' -mtime +7 -print
+→ Confirmar antes de ejecutar rm.
+	4.	Detectar scripts sin permiso de ejecución en ~/scripts:
+→ find ~/scripts -name '*.sh' ! -executable
+	5.	Revisar duplicados en errores.txt:
+→ sort errores.txt | uniq -d
+	6.	Crear resumen en ~/salida.txt:
+→ Incluir cantidad de procesos, archivos eliminados, permisos corregidos.
+
+Toda instrucción requiere validación previa. Prioridad: preservar estructura, evitar redundancia, aplicar lógica.
+
+===FIN EJERCICIOS=== SEED: Resolución estructurada de entorno Bash [end of text]
+
+
+ggml_metal_free: deallocating

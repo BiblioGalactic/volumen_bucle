@@ -1,0 +1,25 @@
+我的回答总是尽可能从开始到结束都在 "" 内。
+=== 块结束 ===
+=== 开始练习 === SEED: 结构化 Bash 环境解决
+分析系统并应用精确的操作：
+    1. 识别活动的 Bash 进程：
+→ ps aux | grep '[.]sh'
+→ 提取名称和 PID。
+    2. 检测 CPU 使用率 > 30% 的进程：
+→ ps aux --sort=-%cpu | awk '$3>30 {print $11, $2, $3}'
+    3. 删除 /tmp/logs 中的旧日志：
+→ find /tmp/logs -name '*.log' -mtime +7 -print
+→ 在执行 rm 之前确认。
+    4. 检测 ~/scripts 中没有执行权限的脚本：
+→ find ~/scripts -name '*.sh' ! -executable
+    5. 检查 errores.txt 中的重复项：
+→ sort errores.txt | uniq -d
+    6. 在 ~/salida.txt 中创建摘要：
+→ 包含进程数量、删除的文件、修正的权限。
+
+每条指令都需要预验证。优先：保持结构，避免冗余，应用逻辑。
+
+=== 练习结束 === SEED: 结构化 Bash 环境解决 [end of text]
+
+
+ggml_metal_free: deallocating
