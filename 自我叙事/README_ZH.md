@@ -32,3 +32,7 @@ autoconversation_ZH.sh
 此脚本特别适用于文本生成实验、对话模拟、语言模型测试以及互动内容创作。  
 建议定期检查记忆文件以评估连贯性，并根据需要在 llama-cli 中调整生成参数。  
 模块化设计使得你可以扩展短语生成功能，添加新的主语、动词或情感，而不必修改核心逻辑。
+
+**Eto Demerzel** (Gustavo Silva Da Costa)
+https://etodemerzel.gumroad.com  
+https://github.com/BiblioGalactic

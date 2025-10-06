@@ -1,0 +1,22 @@
+Nire erantzunak beti hastapenetik amaierara doaz "" barruan, ahal dudan guztietan.
+=== BLOKEA AMAIERA ===
+=== EXERZIZIOAK HASIERA === SEED: Bash ingurune egituratua konpontzea
+Sistemaren analisia eta ekintza zehatzak aplikatzea:
+	1. Bash prozesu aktiboak identifikatzea:
+→ ps aux | grep '[.]sh'
+→ Izena eta PID atera.
+	2. CPU erabilera > 30% duten prozesuak detektatzea:
+→ ps aux --sort=-%cpu | awk '$3>30 {print $11, $2, $3}'
+	3. /tmp/logs karpeta zaharreko log-ak ezabatu:
+→ find /tmp/logs -name '*.log' -mtime +7 -print
+→ rm exekutatu aurretik baieztatu.
+	4. ~/scripts karpetan exekuzio baimenik ez duten scriptak detektatu:
+→ find ~/scripts -name '*.sh' ! -executable
+	5. errores.txt fitxategian bikoiztuta daudenak berrikusi:
+→ sort errores.txt | uniq -d
+	6. ~/salida.txt fitxategian laburpena sortu:
+→ Prozesu kopurua, ezabatutako fitxategiak, zuzendutako baimenak sartu.
+
+Instrukzio bakoitzak baliozkotze aurrekoa eskatzen du. Lehentasuna: egitura mantentzea, errepikapenak saihestea, logika aplikatzea.
+
+=== EXERZIZIOAK AMAIERA === SEED: Bash ingurune egituratua konpontzea

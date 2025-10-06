@@ -32,3 +32,8 @@ Se recomienda contar con suficientes recursos de CPU y memoria para permitir que
 Este script es especialmente útil para experimentos de generación de texto, simulaciones de conversaciones, pruebas de modelos de lenguaje y creación de contenidos interactivos.  
 Se recomienda revisar periódicamente el archivo de memoria para evaluar la coherencia y ajustar parámetros de generación en `llama-cli` según sea necesario.  
 El diseño modular permite ampliar las funciones de generación de frases, agregar nuevos sujetos, verbos o emociones, y personalizar el comportamiento de la interacción sin modificar la lógica central.
+
+
+**Eto Demerzel** (Gustavo Silva Da Costa)
+https://etodemerzel.gumroad.com  
+https://github.com/BiblioGalactic

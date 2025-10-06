@@ -47,3 +47,7 @@ Diseñado para entornos offline, reproducibles y totalmente locales.
 ---
 
 Creado por **Eto Demerzel**
+
+**Eto Demerzel** (Gustavo Silva Da Costa)
+https://etodemerzel.gumroad.com  
+https://github.com/BiblioGalactic

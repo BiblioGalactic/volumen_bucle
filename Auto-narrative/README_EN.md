@@ -32,3 +32,7 @@ It is recommended to have sufficient CPU and memory resources to allow the model
 This script is especially useful for text generation experiments, conversation simulations, language model testing, and interactive content creation.  
 It is recommended to periodically review the memory file to evaluate coherence and adjust generation parameters in `llama-cli` as needed.  
 The modular design allows expanding sentence generation functions, adding new subjects, verbs, or emotions, and customizing the interaction behavior without modifying the core logic.
+
+**Eto Demerzel** (Gustavo Silva Da Costa)
+https://etodemerzel.gumroad.com  
+https://github.com/BiblioGalactic

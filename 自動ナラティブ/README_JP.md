@@ -15,3 +15,7 @@ Mistralとの対話スクリプト
 使い方
 
 まず、スクリプトに実行権限を付与します：chmod +x autoconversacion.sh  
+
+**Eto Demerzel** (Gustavo Silva Da Costa)
+https://etodemerzel.gumroad.com  
+https://github.com/BiblioGalactic

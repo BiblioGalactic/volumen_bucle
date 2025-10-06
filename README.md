@@ -208,6 +208,6 @@ https://github.com/BiblioGalactic
 
 ## 📌 作者
 
-**Eto Demerzel**  
+**Eto Demerzel** (Gustavo Silva Da Costa)
 https://etodemerzel.gumroad.com  
 https://github.com/BiblioGalactic
