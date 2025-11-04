@@ -23,7 +23,7 @@ read -e -p "Chemin du binaire : " MAIN_BINARY_INPUT
 MAIN_BINARY="${MAIN_BINARY_INPUT:-$HOME/llama.cpp/build/bin/llama-cli}"
 
 read -e -p "Chemin vers le fichier de mémoire : " MEMORIA_INPUT
-MEMORIA="${MEMORIA_INPUT:-$HOME/conversacion.txt}"
+MEMORIA="${MEMORIA_INPUT:-$HOME/conversation.txt}"
 
 read -e -p "Chemin du répertoire temporaire : " TEMP_DIR_INPUT
 TEMP_DIR="${TEMP_DIR_INPUT:-$HOME/temp}"
