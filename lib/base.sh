@@ -17,7 +17,8 @@ set -euo pipefail
 # === 📍 Resolver raíz del proyecto ===
 LOOP_DIR="$(cd "$(dirname "${BASH_SOURCE[1]}")" && pwd)"
 VOLUMEN_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-EXPUESTO_ROOT="$(cd "$VOLUMEN_ROOT/.." && pwd)"
+WORKSPACE_ROOT="$(cd "$VOLUMEN_ROOT/.." && pwd)"
+EXPUESTO_ROOT="${WORKSPACE_ROOT}/Expuesto"
 
 # === 📦 Cargar librería común si existe ===
 if [[ -f "$EXPUESTO_ROOT/lib/bash-common.sh" ]]; then
