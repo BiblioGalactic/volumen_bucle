@@ -14,19 +14,42 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # ============================================================
+# 🔒 SARRERA SANITIZAZIOA
+# ============================================================
+sanitize_path() {
+    local input="$1"
+    local label="$2"
+    if [[ "$input" =~ ["\\$\`\;|\&\>\<\!\(\)\{\}\[\]] ]]; then
+        echo "❌ Bidea ez da baliozkoa $label-rentzat: debekatutako karaktereak" >&2
+        exit 1
+    fi
+    if [[ -z "$input" ]]; then
+        echo "❌ Biderik ez $label-rentzat" >&2
+        exit 1
+    fi
+    echo "$input"
+}
+
+# ============================================================
 # KONFIGURAZIOA
 # ============================================================
 read -e -p "Modeloaren bidea: " MODELO_PATH_INPUT
 MODELO_PATH="${MODELO_PATH_INPUT:-$HOME/mistral-7b-instruct-v0.1.Q6_K.gguf}"
+MODELO_PATH=$(sanitize_path "$MODELO_PATH" "modeloa")
+[[ ! -f "$MODELO_PATH" ]] && echo "❌ Modeloa ez da aurkitu: $MODELO_PATH" && exit 1
 
 read -e -p "Binarioaren bidea: " MAIN_BINARY_INPUT
 MAIN_BINARY="${MAIN_BINARY_INPUT:-$HOME/llama.cpp/build/bin/llama-cli}"
+MAIN_BINARY=$(sanitize_path "$MAIN_BINARY" "binarioa")
+[[ ! -x "$MAIN_BINARY" ]] && echo "❌ Binarioa ez da aurkitu edo ez du baimenak: $MAIN_BINARY" && exit 1
 
 read -e -p "Memoria-fitxategiaren bidea: " MEMORIA_INPUT
 MEMORIA="${MEMORIA_INPUT:-$HOME/elkarrizketa.txt}"
+MEMORIA=$(sanitize_path "$MEMORIA" "memoria")
 
 read -e -p "Direktorio temporalaren bidea: " TEMP_DIR_INPUT
 TEMP_DIR="${TEMP_DIR_INPUT:-$HOME/temp}"
+TEMP_DIR=$(sanitize_path "$TEMP_DIR" "aldi baterako direktorioa")
 
 # ============================================================
 # FUNTZIOAK

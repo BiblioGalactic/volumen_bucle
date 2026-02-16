@@ -13,19 +13,42 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # ============================================================
+# 🔒 入力のサニタイズ
+# ============================================================
+sanitize_path() {
+    local input="$1"
+    local label="$2"
+    if [[ "$input" =~ [\"\\$\`\;|\&\>\<\!\(\)\{\}\[\]] ]]; then
+        echo "❌ $label のパスが無効：禁止文字が検出されました" >&2
+        exit 1
+    fi
+    if [[ -z "$input" ]]; then
+        echo "❌ $label のパスが空です" >&2
+        exit 1
+    fi
+    echo "$input"
+}
+
+# ============================================================
 # 設定
 # ============================================================
 read -e -p "モデルのパス: " MODELO_PATH_INPUT
 MODELO_PATH="${MODELO_PATH_INPUT:-$HOME/mistral-7b-instruct-v0.1.Q6_K.gguf}"
+MODELO_PATH=$(sanitize_path "$MODELO_PATH" "モデル")
+[[ ! -f "$MODELO_PATH" ]] && echo "❌ モデルが見つかりません: $MODELO_PATH" && exit 1
 
 read -e -p "バイナリのパス: " MAIN_BINARY_INPUT
 MAIN_BINARY="${MAIN_BINARY_INPUT:-$HOME/llama.cpp/build/bin/llama-cli}"
+MAIN_BINARY=$(sanitize_path "$MAIN_BINARY" "バイナリ")
+[[ ! -x "$MAIN_BINARY" ]] && echo "❌ バイナリが見つからないか権限がありません: $MAIN_BINARY" && exit 1
 
 read -e -p "メモリファイルのパス: " MEMORIA_INPUT
 MEMORIA="${MEMORIA_INPUT:-$HOME/conversacion.txt}"
+MEMORIA=$(sanitize_path "$MEMORIA" "メモリファイル")
 
 read -e -p "一時ディレクトリのパス: " TEMP_DIR_INPUT
 TEMP_DIR="${TEMP_DIR_INPUT:-$HOME/temp}"
+TEMP_DIR=$(sanitize_path "$TEMP_DIR" "一時ディレクトリ")
 
 # ============================================================
 # 関数

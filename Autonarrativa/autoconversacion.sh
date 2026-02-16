@@ -14,19 +14,42 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # ============================================================
+# 🔒 SANITIZACIÓN DE INPUT
+# ============================================================
+sanitize_path() {
+    local input="$1"
+    local label="$2"
+    if [[ "$input" =~ [\"\\$\`\;|\&\>\<\!\(\)\{\}\[\]] ]]; then
+        echo "❌ Ruta inválida para $label: caracteres prohibidos" >&2
+        exit 1
+    fi
+    if [[ -z "$input" ]]; then
+        echo "❌ Ruta vacía para $label" >&2
+        exit 1
+    fi
+    echo "$input"
+}
+
+# ============================================================
 # CONFIGURACIÓN
 # ============================================================
 read -e -p "Ruta al modelo: " MODELO_PATH_INPUT
 MODELO_PATH="${MODELO_PATH_INPUT:-$HOME/mistral-7b-instruct-v0.1.Q6_K.gguf}"
+MODELO_PATH=$(sanitize_path "$MODELO_PATH" "modelo")
+[[ ! -f "$MODELO_PATH" ]] && echo "❌ Modelo no encontrado: $MODELO_PATH" && exit 1
 
 read -e -p "Ruta al binario: " MAIN_BINARY_INPUT
 MAIN_BINARY="${MAIN_BINARY_INPUT:-$HOME/llama.cpp/build/bin/llama-cli}"
+MAIN_BINARY=$(sanitize_path "$MAIN_BINARY" "binario")
+[[ ! -x "$MAIN_BINARY" ]] && echo "❌ Binario no encontrado o sin permisos: $MAIN_BINARY" && exit 1
 
 read -e -p "Ruta al archivo de memoria: " MEMORIA_INPUT
 MEMORIA="${MEMORIA_INPUT:-$HOME/conversacion.txt}"
+MEMORIA=$(sanitize_path "$MEMORIA" "memoria")
 
 read -e -p "Ruta al directorio temporal: " TEMP_DIR_INPUT
 TEMP_DIR="${TEMP_DIR_INPUT:-$HOME/temp}"
+TEMP_DIR=$(sanitize_path "$TEMP_DIR" "directorio temporal")
 
 # ============================================================
 # FUNCIONES

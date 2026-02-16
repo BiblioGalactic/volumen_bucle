@@ -14,19 +14,42 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # ============================================================
+# 🔒 INPUT SANITIZATION
+# ============================================================
+sanitize_path() {
+    local input="$1"
+    local label="$2"
+    if [[ "$input" =~ [\"\\$\`\;|\&\>\<\!\(\)\{\}\[\]] ]]; then
+        echo "❌ Invalid path for $label: forbidden characters detected" >&2
+        exit 1
+    fi
+    if [[ -z "$input" ]]; then
+        echo "❌ Empty path for $label" >&2
+        exit 1
+    fi
+    echo "$input"
+}
+
+# ============================================================
 # CONFIGURATION
 # ============================================================
 read -e -p "Path to the model: " MODELO_PATH_INPUT
 MODELO_PATH="${MODELO_PATH_INPUT:-$HOME/mistral-7b-instruct-v0.1.Q6_K.gguf}"
+MODELO_PATH=$(sanitize_path "$MODELO_PATH" "model")
+[[ ! -f "$MODELO_PATH" ]] && echo "❌ Model not found: $MODELO_PATH" && exit 1
 
 read -e -p "Path to the binary: " MAIN_BINARY_INPUT
 MAIN_BINARY="${MAIN_BINARY_INPUT:-$HOME/llama.cpp/build/bin/llama-cli}"
+MAIN_BINARY=$(sanitize_path "$MAIN_BINARY" "binary")
+[[ ! -x "$MAIN_BINARY" ]] && echo "❌ Binary not found or no permission: $MAIN_BINARY" && exit 1
 
 read -e -p "Path to memory file: " MEMORIA_INPUT
 MEMORIA="${MEMORIA_INPUT:-$HOME/conversacion.txt}"
+MEMORIA=$(sanitize_path "$MEMORIA" "memory file")
 
 read -e -p "Path to temporary directory: " TEMP_DIR_INPUT
 TEMP_DIR="${TEMP_DIR_INPUT:-$HOME/temp}"
+TEMP_DIR=$(sanitize_path "$TEMP_DIR" "temp directory")
 
 # ============================================================
 # FUNCTIONS

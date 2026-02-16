@@ -13,19 +13,42 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # ============================================================
+# 🔒 输入清理
+# ============================================================
+sanitize_path() {
+    local input="$1"
+    local label="$2"
+    if [[ "$input" =~ [\"\\$\`\;|\&\>\<\!\(\)\{\}\[\]] ]]; then
+        echo "❌ $label 路径无效：检测到禁止字符" >&2
+        exit 1
+    fi
+    if [[ -z "$input" ]]; then
+        echo "❌ $label 路径为空" >&2
+        exit 1
+    fi
+    echo "$input"
+}
+
+# ============================================================
 # 配置
 # ============================================================
 read -e -p "模型路径: " MODELO_PATH_INPUT
 MODELO_PATH="${MODELO_PATH_INPUT:-$HOME/mistral-7b-instruct-v0.1.Q6_K.gguf}"
+MODELO_PATH=$(sanitize_path "$MODELO_PATH" "模型")
+[[ ! -f "$MODELO_PATH" ]] && echo "❌ 模型未找到: $MODELO_PATH" && exit 1
 
 read -e -p "二进制文件路径: " MAIN_BINARY_INPUT
 MAIN_BINARY="${MAIN_BINARY_INPUT:-$HOME/llama.cpp/build/bin/llama-cli}"
+MAIN_BINARY=$(sanitize_path "$MAIN_BINARY" "二进制文件")
+[[ ! -x "$MAIN_BINARY" ]] && echo "❌ 二进制文件未找到或无权限: $MAIN_BINARY" && exit 1
 
 read -e -p "内存文件路径: " MEMORIA_INPUT
 MEMORIA="${MEMORIA_INPUT:-$HOME/conversacion.txt}"
+MEMORIA=$(sanitize_path "$MEMORIA" "内存文件")
 
 read -e -p "临时目录路径: " TEMP_DIR_INPUT
 TEMP_DIR="${TEMP_DIR_INPUT:-$HOME/temp}"
+TEMP_DIR=$(sanitize_path "$TEMP_DIR" "临时目录")
 
 # ============================================================
 # 函数
