@@ -19,7 +19,7 @@ IFS=$'\n\t'
 sanitize_path() {
     local input="$1"
     local label="$2"
-    if [[ "$input" =~ ["\\$\`\;|\&\>\<\!\(\)\{\}\[\]] ]]; then
+    if [[ "$input" =~ [\"\\$\`\;|\&\>\<\!\(\)\{\}\[\]] ]]; then
         echo "❌ Bidea ez da baliozkoa $label-rentzat: debekatutako karaktereak" >&2
         exit 1
     fi
